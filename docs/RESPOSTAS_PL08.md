@@ -1,4 +1,4 @@
-# Respostões às Questões 1–3 da PL08 (entregar por escrito no fim da aula de 05/11)
+# Respostas às Questões 1–3 da PL08 (entregar por escrito no fim da aula de 05/11)
 
 > Fonte: PL08 §3. Respostas curtas, diretas, sem IA.
 
