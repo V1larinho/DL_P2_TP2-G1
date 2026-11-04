@@ -1,0 +1,27 @@
+{
+  "estrategia": "aleatoria",
+  "seed": 1,
+  "rondas": 14,
+  "K": 161,
+  "n_pool": 6438,
+  "dedup_grupo": false,
+  "final": {
+    "estrategia": "aleatoria",
+    "seed": 1,
+    "ronda": 14,
+    "n_rotulos": 2576,
+    "fracao": 0.4001,
+    "f1_val": 0.7805,
+    "f1_teste": 0.8126,
+    "ece": 0.0446,
+    "n_candidatos": 3862,
+    "hash_rotulado": "291a5a92340d13bb",
+    "segundos": 5.7,
+    "f1_Background": 0.8881,
+    "f1_CorrosionStain": 0.7395,
+    "f1_Crack": 0.8038,
+    "f1_Efflorescence": 0.8042,
+    "f1_ExposedBars": 0.8805,
+    "f1_Spallation": 0.7596
+  }
+}

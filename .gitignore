@@ -1,0 +1,40 @@
+# NOTA: em .gitignore nao existem comentarios no fim da linha — tudo o que vem
+# depois do padrao passa a fazer parte do padrao. Comentarios so em linha propria.
+
+# ---- Dados (licenca CODEBRIM: NAO COMERCIAL, nao redistribuir) ----
+# O dataset fica fora do git. As divisoes e os hashes ficam (sao metadados).
+data/*
+!data/.gitkeep
+!data/splits.csv
+!data/splits.json
+
+# ---- Artefactos pesados: ficam em runs/, com copia no Drive do grupo ----
+# JSON e CSV de runs/ entram (sao a prova das corridas); .npy/.pt nao.
+runs/**
+!runs/.gitkeep
+!runs/**/
+!runs/**/*.json
+!runs/**/*.csv
+
+# ---- Pesos e matrizes ----
+*.npy
+*.npz
+*.pt
+*.pth
+*.h5
+*.keras
+*.ckpt
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+*.egg-info/
+
+# ---- Sistema / editores ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

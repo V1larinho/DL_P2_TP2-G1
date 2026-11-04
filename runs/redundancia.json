@@ -1,0 +1,14 @@
+{
+  "pares_intra": 21668,
+  "pares_inter": 299605,
+  "sim_intra_media": 0.6309,
+  "sim_intra_p5": 0.3327,
+  "sim_inter_media": 0.4237,
+  "sim_inter_p99": 0.7824,
+  "sim_inter_p999": 0.8677,
+  "tau_proposto": 0.8677,
+  "imagens_de_origem_no_pool": 1249,
+  "grupos_por_tau": 4402,
+  "recortes_do_pool_quase_dup_de_um_rotulado": 1387,
+  "fracao_pool_redundante_apos_L": 0.2154
+}

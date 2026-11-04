@@ -1,0 +1,69 @@
+{
+  "zip": "CODEBRIM_classification_dataset.zip",
+  "recortes": 7677,
+  "por_split": {
+    "test": 628,
+    "train": 6438,
+    "val": 611
+  },
+  "classe_por_split": {
+    "train": {
+      "Background": 2185,
+      "Crack": 2208,
+      "Efflorescence": 543,
+      "Spallation": 1608,
+      "ExposedBars": 1215,
+      "CorrosionStain": 1263
+    },
+    "val": {
+      "Background": 150,
+      "Crack": 149,
+      "ExposedBars": 142,
+      "Efflorescence": 141,
+      "Spallation": 140,
+      "CorrosionStain": 146
+    },
+    "test": {
+      "Background": 150,
+      "Spallation": 150,
+      "ExposedBars": 150,
+      "Crack": 150,
+      "CorrosionStain": 150,
+      "Efflorescence": 149
+    }
+  },
+  "multirrotulo_por_split": {
+    "test": 167,
+    "train": 1640,
+    "val": 183
+  },
+  "imagens_de_origem": 1522,
+  "grupos_em_fuga": 0,
+  "exemplos_fuga": {},
+  "sem_split": 0,
+  "sem_etiqueta": 0,
+  "sem_classe_positiva": 52,
+  "exemplos_sem_classe_positiva": [
+    "classification_dataset/test/defects/image_0001470_crop_0000007.png",
+    "classification_dataset/test/defects/image_0001132_crop_0000005.png",
+    "classification_dataset/test/defects/image_0001176_crop_0000007.png",
+    "classification_dataset/test/defects/image_0001470_crop_0000008.png",
+    "classification_dataset/train/defects/image_0001533_crop_0000004.png",
+    "classification_dataset/train/defects/image_0001384_crop_0000002.png",
+    "classification_dataset/train/defects/image_0001415_crop_0000006.png",
+    "classification_dataset/train/defects/image_0001161_crop_0000001.png",
+    "classification_dataset/train/defects/image_0001283_crop_0000001.png",
+    "classification_dataset/train/defects/image_0001153_crop_0000008.png",
+    "classification_dataset/train/defects/image_0001506_crop_0000015.png",
+    "classification_dataset/train/defects/image_0001533_crop_0000003.png",
+    "classification_dataset/train/defects/image_0001530_crop_0000009.png",
+    "classification_dataset/train/defects/image_0001581_crop_0000012.png",
+    "classification_dataset/train/defects/image_0001266_crop_0000018.png",
+    "classification_dataset/train/defects/image_0001424_crop_0000006.png",
+    "classification_dataset/train/defects/image_0001289_crop_0000017.png",
+    "classification_dataset/train/defects/image_0001594_crop_0000002.png",
+    "classification_dataset/train/defects/image_0001063_crop_0000014.png",
+    "classification_dataset/train/defects/image_0001292_crop_0000003.png"
+  ],
+  "recortes_utilizaveis": 7677
+}

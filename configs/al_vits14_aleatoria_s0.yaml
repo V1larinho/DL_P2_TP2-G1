@@ -1,0 +1,31 @@
+# Experiência única do simulador de AL — Tema C (AL 1, CODEBRIM)
+# Um ficheiro por corrida. Nada aqui dentro é re-selecionado por estratégia (ver PROTOCOLO.md §2).
+experiencia: al_aleatoria_seed0
+classificador: cabeca_linear          # cabeca_linear | mlp | resnet50_finetune
+extrator: dinov2_vits14               # pesos congelados, embedding CLS normalizado L2
+estrategia: aleatoria                 # aleatoria | entropia | margem | bald | coreset | badge
+seed: 0
+
+# desenho da simulação (PROTOCOLO.md §2)
+L: 0.05                               # fração do pool, estratificada
+K: 0.025                              # fração do pool por ronda
+rondas: 14
+orcamento: 0.40
+
+dados:
+  splits: data/splits.json            # com hash registado
+  agrupamento: imagem                 # recortes da mesma imagem na mesma partição
+  teste: congelado                    # lido só depois do commit do PROTOCOLO.md
+  embeddings: runs/emb_vits14.npy
+
+hiperparametros:                      # congelados na validação com a estratégia aleatória
+  epocas: 200
+  lr: 0.01
+  weight_decay: 1.0e-4
+  batch_size: 64
+  threshold_por_classe: runs/thresholds.json
+
+saidas:
+  lista_adquirida: runs/aleatoria/seed0/ronda{:02d}.json
+  resultados: paper/resultados.csv
+  log: runs/aleatoria/seed0/log.txt

@@ -1,0 +1,83 @@
+# AI_LOG.md — registo do uso de IA
+
+Obrigatório na UC: **todas** as interações com assistentes de IA que contribuam para o trabalho
+entram aqui, com veredicto e verificação. Cada membro mantém as suas linhas; o dono da tarefa
+confirma a verificação. Formato das aulas: *Proposta da IA · Funcionou/correta? · O que estava
+errado ou em falta · Como verificou*.
+
+**Regra de ouro:** a IA não é fonte. Tudo o que entra no relatório tem de ser confirmado no artigo
+original, no dataset ou no output de um script.
+
+---
+
+## 1. Pedidos obrigatórios (Tema C §8 · PL06 §2.5 · PL07 §2.4 · PL08 §2.5)
+
+| # | Semana | Pedido (texto a usar) | Dono | Estado |
+| --- | --- | --- | --- | --- |
+| **IA-1** | 6 | *"Escreve um README.md para um projeto de Active Learning com o dataset CODEBRIM de defeitos em pontes de betão."* | A1 | **por fazer** — registar no §2 *o que a IA inventou* (datasets, métricas, resultados) comparando com a Tabela 2.1 |
+| **IA-2** | 7 | *"Escreve um script que converta anotações COCO JSON (ou máscaras) para o formato necessário."* | A1 | **por fazer** — verificar desenhando as caixas convertidas sobre **5 imagens** |
+| **IA-3** | 8 | *"Faz-me 5 perguntas difíceis sobre Active Learning pool-based com modelos fundacionais congelados."* | todos | **por fazer** — responder **sem IA**, confirmar no artigo, registar onde a IA foi errada/vaga |
+| **IA-4** | 8 | *"Implementa o BADGE (embeddings de gradiente da última camada + k-means++) para um classificador multi-rótulo."* | A3 | **por fazer** — verificar: `K = |pool|` seleciona tudo; escolhidos diversos no t-SNE; mesma seed ⇒ mesmo resultado |
+| **IA-5** | 9 | *"Identifica fugas de dados, métricas inadequadas e comparações injustas neste PROTOCOLO.md."* | A1 | **por fazer** — decidir crítica a crítica; resposta já iniciada em [`PROTOCOLO.md`](PROTOCOLO.md) §6 |
+| **IA-6** | 14 | *"Marca cada frase desta discussão como suportada ou não pelos números da tabela."* | todos | **por fazer** — reescrever as frases não suportadas |
+
+## 2. Registo (uma linha por interação)
+
+| Data | Membro | Pedido feito | Proposta da IA (código/afirmação) | Funcionou / correta? (S/N/parcial) | O que estava errado ou em falta | Como verificou (output, shape, métrica) | Ficheiro/commit afetado |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 27/10 | A3 (Gonçalo) | Descarregar e **medir** o CODEBRIM com `scripts/contar_codebrim.py` | Script de contagem a partir do zip, com leitura das etiquetas XML e verificação de fuga | **parcial** | Primeira versão contava 7 788 imagens porque incluía os resource forks `__MACOSX/._*.png`; a segunda descobriu **52 recortes com vetor todo a zero**. Também foi preciso tratar `label` como multi-rótulo (`A|B`), porque a pasta só diz `defects` | `md5` = `c1612d9674e2e628e72e7f5817c40130` (igual ao publicado) · `--contar` → 7 677 utilizáveis, 52 excluídos, 0 imagens em duas partições, `exit 0`; `splits.csv` com 7 677 linhas e 29 combinações de rótulos | `scripts/contar_codebrim.py`, `data/splits.csv`, `docs/contagens_codebrim.json` |
+| 27/10 | A3 (Gonçalo) | *"Qual é o melhor dataset para este trabalho?"* — comparação CODEBRIM / SegCODEBRIM / dacl10k / alternativas só-de-fissura | `docs/DATASETS.md` com tabela C1–C7 e recomendação em 3 níveis | **parcial** | O protocolo do tema nomeia **armadura exposta e corrosão** como classes raras; o paper mostra **eflorescência 833** como a mais rara (armadura exposta 1 507, corrosão 1 559). O protocolo também trata "5 354" como recortes, mas são **caixas** (+ 2 506 de fundo) | Lido o §3.2 e o §4.1 do paper (arXiv 1904.08486) e o registo Zenodo (ficheiros, tamanhos e md5); contagens somam 8 304 > 5 354 caixas, o que é coerente com multi-rótulo | `docs/DATASETS.md`, `README.md`, `docs/P2-D1.md`, `PROTOCOLO.md` |
+| 27/10 | A3 (Gonçalo) | Estrutura inicial do repositório, `PENDENTES.md`, esboço do P2-D1, `PROTOCOLO.md` e pitch — a partir dos 6 PDFs da pasta `P2` | Esqueleto + documentos listados | **parcial** | Ver [`docs/REVISAO.md`](docs/REVISAO.md): a IA propôs a métrica da primeira proposta (`mAP@0,5:0,95`), que **não se aplica** a um dataset de classificação de recortes; o texto do protocolo confundia "caixas" com "recortes"; a estimativa computacional contava 4 estratégias quando são 5; o pseudo-código do ALC usa `np.trapz` (descontinuado no NumPy ≥ 2.0); "L estratificado por classe" é indefinido em multi-rótulo | Cada achado foi confrontado com a secção de origem do PDF (coluna "Fonte" em `PENDENTES.md`) e com o número de páginas/campos do documento; ver §3 abaixo | `README.md`, `PENDENTES.md`, `docs/P2-D1.md`, `PROTOCOLO.md`, `slides/P2-D1_pitch.md` |
+| 27/10 | A1 (Fausto) | Agentes de pesquisa, um por membro: *"que datasets de defeitos com drone existem e que limiar usar para quase-duplicados?"* | Recomendação de segundo domínio + τ para deduplicação | **parcial** | Não existe dataset **multi-rótulo** de defeitos captado por drone com licença verificável: os candidatos são segmentação (dacl10k, CC BY-NC; SegCODEBRIM, MIT), binários (SDNET2018, CC BY 4.0) ou de acesso fechado. Para τ **não há valor publicado** para betão; o `imagededup` usa Hamming ≤10 em 64 bits e o 0,95 do CLIP é heurística de issue, não limiar validado | τ medido neste dataset (p99,9 dos pares entre imagens) = **0,868**; 21,5% do pool redundante após L, em `runs/redundancia.json` | `docs/DRONE.md` §5.1, `src/redundancia.py` |
+| 27/10 | A2 (Gabriela) | Protocolo de *linear probe* do DINOv2 e como defender o baseline | SGD momentum 0,9, weight decay 0, cosine, busca de lr 1e-5..0,1; `linear.py` 10 épocas × 1 250 iterações, batch 128/GPU | **S** (para o que foi lido) — mas a adaptação **não** é o protocolo oficial: o `linear.py` é softmax de rótulo único | O `log_regression.py` faz **L2 regularization**, não normalização L2 das características — são coisas diferentes e a confusão é fácil de defender mal. O CODEBRIM original usa **sigmoide + BCE** por classe, que é o que fazemos | `src/probe.py` (BCE, AdamW, lr 0,01, 200 épocas), teto 0,8306 em 3 seeds | `src/probe.py`, `src/baseline.py` |
+| 27/10 | A4 (Pedro) | Padrões de UI para anotação com AL, custo de anotação honesto, e ancoragem | Mostrar previsão ao anotador para acelerar | **parcial / contra** | Mostrar a previsão **ancora**: em patologia, 7% de decisões corretas foram revertidas por sugestão errada da IA (Rosbach et al.). Não há batch size "ótimo" publicado; e não se pode reportar κ sem dois anotadores independentes | App passa a **ocultar** a previsão por omissão; `--revelar` existe para testar a ancoragem; o custo é tempo observado por recorte, não "segundos por rótulo" | `src/app.py` |
+| 27/10 | A5 (Marco) | IC com amostras agrupadas, ECE multi-rótulo, ALC | Bootstrap simples sobre recortes | **parcial (errado)** | Com vários recortes por imagem, o bootstrap tem de ser **por cluster (imagem de origem)**; seeds e teste são **cruzados**, não aninhados; ECE multi-rótulo faz-se **por classe e média** (top-1 não tem sentido com sigmoides independentes); ALC por trapézios na fração real, **sem suavizar** curvas não monótonas | `src/avaliar.py`: bootstrap cruzado B=400, 135 grupos de teste; Tabelas 1–3 | `src/avaliar.py`, `paper/tabelas/` |
+| 27/10 | A3 (Gonçalo) | Referências para BALD / CoreSet / BADGE em características congeladas | — | **N (falhou)** | O agente de pesquisa devolveu `upstream_provider_error`; o BADGE foi implementado a partir da fórmula do artigo (Ash et al. 2020) com adaptação multi-rótulo declarada no docstring, **sem** verificação externa. É o único ponto deste lote sem segunda fonte | `pontuar()`/`escolher()` em `src/al.py`; BADGE deu ALC 0,8072 (+0,0128 vs aleatória) | `src/al.py` |
+| 27/10 | todos | Correr o pipeline completo (dados → embeddings → teto → 18 corridas → avaliação) | Código + números | **S** nos números | Ver [`docs/RESULTADOS.md`](docs/RESULTADOS.md) §7: baseline EfficientNet não corrida, campanha de anotação não feita, protocolo ainda não fechado | `python src/dados.py --verificar` sem erro · k-NN 0,7000 (acaso 0,2551) · teto 0,8306 · BALD +0,0218 [+0,0109; +0,0321] · 270 treinos | `src/`, `paper/tabelas/`, `docs/RESULTADOS.md` |
+
+*(acrescentar linhas; não apagar — o histórico faz parte do entregável)*
+
+## 3. Fontes externas: o que foi confirmado e o que falta
+
+### Resolvido (27/10, segunda tentativa — pesquisa feita diretamente)
+
+| Facto | Valor confirmado | Fonte lida |
+| --- | --- | --- |
+| Imagens e pontes | 1 590 imagens de **30 pontes** | arXiv `1904.08486` §3.2 |
+| Anotações | **5 354** caixas de defeito + **2 506** caixas de fundo | idem |
+| Contagem por classe | fissura 2 507 · delaminação 1 898 · corrosão 1 559 · armadura exposta 1 507 · **eflorescência 833** | idem |
+| Divisão oficial | **150** exemplos por classe em validação e em teste; agrupamento **por imagem**, não por ponte | idem §4.1 |
+| Ficheiros e versões | `classification_dataset` 7,9 GB (md5 `c1612d96…`) · `original_images` 8,3 GB · `cropped` 7,9 GB · `classification_balanced` 12,2 GB (**não usar**) | [zenodo.org/records/2620293](https://zenodo.org/records/2620293) |
+| Extensão | **SegCODEBRIM**: 420 máscaras de fissura, **MIT** | [zenodo.org/records/10071534](https://zenodo.org/records/10071534) |
+| Segundo domínio candidato | **dacl10k**: 9 920 imagens, 19 classes (13 danos + 6 objetos) | arXiv `2309.00460` · FiftyOne zoo |
+
+### Resolvido (27/10, pesquisa por membro)
+
+| Facto | Valor confirmado | Fonte lida |
+| --- | --- | --- |
+| Identificador DINOv2 no timm | `vit_small_patch14_dinov2.lvd142m` (22 M parâmetros; 518 px por omissão → `dynamic_img_size=True` para 224) | executado: `timm 1.0.30`, embedding 384-d |
+| Linear probe no DINOv2 oficial | SGD momentum 0,9 · wd 0 · cosine · lr em grelha 1e-5..0,1 · 10 épocas × 1 250 it | [github.com/facebookresearch/dinov2 · eval/linear.py](https://github.com/facebookresearch/dinov2/blob/main/dinov2/eval/linear.py) |
+| Rotulos do CODEBRIM | **sigmoide por classe + BCE**, limiar 0,5 no paper | arXiv `1904.08486` (procedimento de treino) |
+| Datasets de drone | Nenhum multi-rótulo com licença verificável; dacl10k **CC BY-NC 4.0**, SDNET2018 **CC BY 4.0**, SegCODEBRIM **MIT** | [dacl10k-toolkit](https://github.com/phiyodr/dacl10k-toolkit) · [SDNET2018](https://digitalcommons.usu.edu/all_datasets/48/) · [SegCODEBRIM](https://zenodo.org/records/10071534) |
+| Bootstrap com clusters | Reamostrar **a imagem de origem inteira**, nunca recortes isolados | [Loy & Korobova, *Bootstrapping Clustered Data in R*](https://journal.r-project.org/articles/RJ-2023-015/) |
+| ECE multi-rótulo | **Marginal por classe**, depois média; \(p_c=\sigma(z_c/T)\) com T ajustado por BCE na validação | [Guo et al. 2017](https://proceedings.mlr.press/v70/guo17a.html) · [Ullah et al. 2024](https://arxiv.org/html/2411.04276v1) |
+| Ancoragem por sugestão da IA | Efeito medido com especialistas (7% de reversão de decisões corretas) — **não** em betão | [Rosbach et al., *Stuck on Suggestions*](https://arxiv.org/html/2603.11821v2) |
+
+### Por confirmar
+
+- Algoritmo e garantia do **CoreSet** e detalhe dos *gradient embeddings* do **BADGE** — o agente de pesquisa falhou
+  (`upstream_provider_error`) e a implementação vem do artigo, sem segunda fonte. Re-perguntar antes do seminário.
+- Limiar de quase-duplicados **para vídeo de drone** (o 0,868 medido é de imagens fixas do CODEBRIM).
+
+Tudo o resto fica como leitura em `paper/leituras/` (`C1.11` em `PENDENTES.md`), sempre a citar o
+artigo original:
+
+- Mundt et al., *Meta-Learning Convolutional Neural Architectures for Multi-Target Concrete Defect
+  Classification with the CODEBRIM Dataset*, CVPR 2019.
+- Oquab et al., *DINOv2: Learning Robust Visual Features without Supervision*, 2023 → extrator.
+- Sener & Savarese, *Active Learning for Convolutional Neural Networks: A Core-Set Approach*, ICLR 2018.
+- Ash et al., *Deep Batch Active Learning by Diverse, Uncertain Gradient Lower Bounds*, ICLR 2020.
+- Gal et al., *Deep Bayesian Active Learning with Image Data*, ICML 2017.
+- Settles, *Active Learning Literature Survey*, 2009.
+- Munjal et al., *Towards Robust and Reproducible Active Learning Using Neural Networks*, 2022.
+- Jaziri et al., *SegCODEBRIM*, WACV 2024 (extensão opcional).

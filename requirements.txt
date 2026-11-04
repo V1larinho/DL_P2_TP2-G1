@@ -1,0 +1,26 @@
+# Deep Learning Aplicado 2026/2027 - P2 - Tema C (AL 1, CODEBRIM)
+# Pinar tudo o que entra nos resultados: o AI_LOG.md e o PROTOCOLO.md dependem disto.
+
+# --- Extractor de caracteristicas (familia C) ---
+torch>=2.4
+torchvision>=0.19
+timm>=1.0                    # DINOv2 ViT-S/14 e ViT-B/14 (alternativa: transformers)
+transformers>=4.44           # fallback para facebook/dinov2-*
+scikit-learn>=1.5            # k-NN de sanidade, metricas, spliters
+
+# --- Numero e dados ---
+numpy>=1.26
+pandas>=2.2
+scipy>=1.13
+scikit-image>=0.23           # Dice/IoU do guia de segmentacao (PL06)
+
+# --- Avaliacao e figuras ---
+matplotlib>=3.9
+seaborn>=0.13
+
+# --- Aplicacao (assistente de anotacao) ---
+gradio>=4.44
+
+# --- Guias obrigatorios das PL ---
+# ultralytics>=8.3           # AGPL-3.0: declarar no README do P2 (PL07 + Aula 07)
+# tensorflow>=2.16           # alternativa sem AGPL: RetinaNet do KerasHub (Cap. 12.3)

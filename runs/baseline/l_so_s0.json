@@ -1,0 +1,27 @@
+{
+  "nome": "l_so",
+  "seed": 0,
+  "n_rotulos": 322,
+  "fracao_pool": 0.050015532774153465,
+  "f1_val": 0.7328,
+  "f1_teste": 0.7665,
+  "f1_por_classe": {
+    "Background": 0.8822,
+    "CorrosionStain": 0.6595,
+    "Crack": 0.8155,
+    "Efflorescence": 0.6735,
+    "ExposedBars": 0.7766,
+    "Spallation": 0.7919
+  },
+  "ece_macro": 0.0662,
+  "temperatura": 1.204,
+  "limiares": {
+    "Background": 0.8,
+    "CorrosionStain": 0.4,
+    "Crack": 0.55,
+    "Efflorescence": 0.15,
+    "ExposedBars": 0.45,
+    "Spallation": 0.65
+  },
+  "segundos": 1.1
+}

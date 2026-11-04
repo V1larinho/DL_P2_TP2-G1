@@ -1,0 +1,12 @@
+{
+  "modelo": "dinov2_vits14",
+  "timm": "vit_small_patch14_dinov2.lvd142m",
+  "n": 7677,
+  "dim": 384,
+  "normalizado_l2": true,
+  "pooling": "cls",
+  "tamanho": 224,
+  "hash_indice": "ea47eb0d2531548b",
+  "excluidos_sem_rotulo": 0,
+  "segundos": 475.1
+}

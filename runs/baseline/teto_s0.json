@@ -1,0 +1,27 @@
+{
+  "nome": "teto",
+  "seed": 0,
+  "n_rotulos": 6438,
+  "fracao_pool": 1.0,
+  "f1_val": 0.7958,
+  "f1_teste": 0.8296,
+  "f1_por_classe": {
+    "Background": 0.9054,
+    "CorrosionStain": 0.7514,
+    "Crack": 0.8187,
+    "Efflorescence": 0.7782,
+    "ExposedBars": 0.8839,
+    "Spallation": 0.84
+  },
+  "ece_macro": 0.0435,
+  "temperatura": 1.325,
+  "limiares": {
+    "Background": 0.65,
+    "CorrosionStain": 0.2,
+    "Crack": 0.45,
+    "Efflorescence": 0.2,
+    "ExposedBars": 0.35,
+    "Spallation": 0.65
+  },
+  "segundos": 18.0
+}
