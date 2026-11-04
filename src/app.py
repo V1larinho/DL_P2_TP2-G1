@@ -31,6 +31,16 @@ import comum as C  # noqa: E402
 FILA = C.RUNS / "fila_anotacao.csv"
 ANOT = C.RUNS / "anotacoes.csv"
 
+# Nomes em português para a interface do anotador
+NOMES_CLASSES_PT = {
+    "Background": "Fundo (sem defeito)",
+    "CorrosionStain": "Mancha de Corrosão",
+    "Crack": "Fissura",
+    "Efflorescence": "Eflorescência",
+    "ExposedBars": "Armadura Exposta",
+    "Spallation": "Delaminação",
+}
+
 
 def gerar_fila(n: int = 40, seed: int = 0, estrategia: str = "entropia") -> Path:
     """Ordena o pool nao rotulado pela incerteza do modelo treinado com L (5%)."""
@@ -70,11 +80,11 @@ def gerar_fila(n: int = 40, seed: int = 0, estrategia: str = "entropia") -> Path
 
 
 def servir(revelar: bool = False, anotador: str = "anon"):
-    """UI minima: imagem, 6 caixas, gravar, proximo."""
+    """Interface gráfica em Gradio: recorte, caixas de seleção em português, gravar e cronómetro."""
     try:
         import gradio as gr
     except ImportError:
-        print("gradio nao esta instalado. `pip install gradio` (esta em requirements.txt).")
+        print("Gradio não está instalado. Execute `pip install gradio`.")
         return 1
     if not FILA.exists():
         gerar_fila()
@@ -84,18 +94,19 @@ def servir(revelar: bool = False, anotador: str = "anon"):
     def carregar():
         i = estado["i"]
         if i >= len(fila):
-            return (None,) + tuple(False for _ in C.CLASSES) + ("fim da fila",)
+            return (None,) + tuple(False for _ in C.CLASSES) + ("### 🎉 Fila terminada!\nTodos os recortes desta ronda foram anotados.",)
         r = fila.iloc[i]
         estado["t0"] = time.time()
-        nota = f"{r.ordem}/{len(fila)} — incerteza {r.incerteza:.3f} (nao e a previsao)"
+        nota = f"**Recorte {r.ordem} de {len(fila)}** — Incerteza do modelo: `{r.incerteza:.3f}` *(maior = mais prioritário)*"
         if revelar:
-            nota += f" | sugestao: {r.previsto_oculto or 'nenhuma'}"
+            sugestoes = [NOMES_CLASSES_PT.get(c, c) for c in (r.previsto_oculto.split("|") if pd.notna(r.previsto_oculto) and r.previsto_oculto else [])]
+            nota += f"\n\n🤖 **Sugestão do modelo (condição com revelação):** {', '.join(sugestoes) if sugestoes else 'Nenhuma'}"
         return (str(C.caminho_imagem(r.path)),) + tuple(False for _ in C.CLASSES) + (nota,)
 
     def gravar(*vals):
         rotulos, i = vals[:-1], estado["i"]
         if i >= len(fila):
-            return "fila terminada"
+            return "Fila já terminada."
         r = fila.iloc[i]
         dt = time.time() - estado["t0"]
         linha = {
@@ -112,18 +123,23 @@ def servir(revelar: bool = False, anotador: str = "anon"):
         fila.loc[i, "anotado"] = 1
         fila.to_csv(FILA, index=False)
         estado["i"] += 1
-        return f"gravado em {dt:.1f}s — proximo"
+        return f"✅ Anotação guardada em {dt:.1f}s — a carregar próximo recorte..."
 
-    with gr.Blocks(title="CODEBRIM — assistente de anotacao") as app:
-        gr.Markdown("## Assistente de anotacao\nMarca os defeitos visiveis. O modelo **nao** mostra a sua previsao.")
+    with gr.Blocks(title="CODEBRIM — Assistente de Anotação (Active Learning)") as app:
+        gr.Markdown(
+            "## 🔍 Assistente de Anotação Ativa — CODEBRIM (Tema C)\n"
+            "Assinale todas as patologias visíveis no recorte de betão. "
+            "Por omissão, o modelo **não exibe a sua previsão** para evitar enviesamento e ancoragem cognitiva (*Rosbach et al., 2026*)."
+        )
         with gr.Row():
-            img = gr.Image(type="filepath", label="recorte", height=320)
+            img = gr.Image(type="filepath", label="Recorte de Inspeção de Betão", height=340)
             with gr.Column():
-                caixas = [gr.Checkbox(label=c) for c in C.CLASSES]
+                gr.Markdown("### Patologias a Identificar:")
+                caixas = [gr.Checkbox(label=NOMES_CLASSES_PT.get(c, c)) for c in C.CLASSES]
                 nota = gr.Markdown("")
         with gr.Row():
-            b_grav = gr.Button("Gravar e seguir", variant="primary")
-            b_ver = gr.Button("Ver a imagem outra vez (repor cronometro)")
+            b_grav = gr.Button("💾 Gravar e Próximo", variant="primary", scale=2)
+            b_ver = gr.Button("🔄 Recarregar Imagem (repor cronómetro)", scale=1)
         b_ver.click(lambda: carregar(), outputs=[img] + caixas + [nota])
         b_grav.click(gravar, inputs=caixas, outputs=[nota]).then(carregar, outputs=[img] + caixas + [nota])
         app.load(carregar, outputs=[img] + caixas + [nota])
