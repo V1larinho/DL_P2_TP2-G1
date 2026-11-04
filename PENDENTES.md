@@ -129,8 +129,8 @@ H1–H4 + L/K/orçamento fixados ──> PROTOCOLO.md ──> só então correr 
 - [x] **C1.8** **Teto** (100% dos rótulos) e **L-só** com a cabeça linear — *feito: teto F1 0,8296/0,8306 (3 seeds); L-só 0,7665 na seed 0* — **A2** · *Tema C §5.1*
 - [ ] **C1.9** App **v0**: recorte → defeitos previstos — **A1, A4** · *Tema C §5.1*
 - [ ] **C1.11** 2 artigos por via + SOTA do orientador, fichas de 1 página em `paper/leituras/` (≈10 fichas) — **cada um na sua via** · *Tema C §2.2, §5.1*
-- [ ] **C1.12** Hipóteses **H1–H4** escritas e aceites pelo grupo — **A3** · *Tema C §6*
-- [ ] **C1.13** Fixar **L, K, orçamento total** (5% · 2,5% · 40% → 14 rondas), **regra de paragem** e **acordo de autoria** (ICMJE) — **todos** · *Tema C §5.1, §6, §7.3*
+- [x] **C1.12** Hipóteses **H1–H4** escritas e aceites pelo grupo — **A3** · *Tema C §6* — *feito: `PROTOCOLO.md` commitado em 9f89717, versão final*
+- [x] **C1.13** Fixar **L, K, orçamento total** (5% · 2,5% · 40% → 14 rondas), **regra de paragem** e **acordo de autoria** (ICMJE) — **todos** · *Tema C §5.1, §6, §7.3* — *feito: `PROTOCOLO.md` commitado em 9f89717, versão final*
 - [ ] **C1.14** Estimativa computacional (rondas × estratégias × seeds; ResNet-50 afinada) — **A3** · *Tema C §5.1*
 
 ### Fase 2 — desenvolvimento das vias e seminário (sem. 8–10 → 17/11)
@@ -140,7 +140,7 @@ H1–H4 + L/K/orçamento fixados ──> PROTOCOLO.md ──> só então correr 
 - [ ] **C2.3** ResNet-50 afinada — **teto** — **A2** · *Tema C §5.2*
 - [ ] **C2.4** `src/enviesamento.py` — composição do conjunto rotulado por ronda — **A4** · *Tema C §5.2*
 - [x] **C2.5** `src/avaliar.py` — curvas, **ALC**, **rótulos para 95% do teto**, bootstrap — *feito: bootstrap **cruzado** (imagens × seeds), B=400, IC na Tabela 1 e diferenças emparelhadas na Tabela 2* — **A5** · *Tema C §5.2*
-- [x] **C2.6** `PROTOCOLO.md` escrito — *feito: [`PROTOCOLO.md`](PROTOCOLO.md); **fechar e versionar na PL09, antes de qualquer avaliação no teste*** — **A1** · *Tema C §5.2, §6*
+- [x] **C2.6** `PROTOCOLO.md` escrito e fechado — *feito: [`PROTOCOLO.md`](PROTOCOLO.md) commitado em 9f89717, versão final* — **A1** · *Tema C §5.2, §6*
 - [x] **C2.7** **CoreSet** (k-center greedy em embeddings) e **BADGE** (embeddings de gradiente da última camada + k-means++) — *feito: BADGE adaptado a multi-rótulo com pseudo-rótulo, `g=(p-ŷ)⊗h`* — **A3** · *Tema C §5.2, §8*
 - [x] **C2.8** Corridas completas na **validação**: 5 estratégias × 3 seeds, cabeça linear — *feito: **6 estratégias × 3 seeds × 15 pontos** = 270 treinos, 18 corridas* — **A3, A5** · *Tema C §5.2*
 - [x] **C2.9** **ECE** por ronda — *feito: ECE marginal por classe (10 bins); Tabela 3* — **A5** · *Tema C §5.2*

@@ -5,11 +5,11 @@
 
 | # | Comentário do docente (feedback P2-D1) | Decisão do grupo | Responsável | Estado |
 |---|---|---|---|---|
-| 1 | | | | a fazer |
-| 2 | | | | a fazer |
-| 3 | | | | a fazer |
-| 4 | | | | a fazer |
-| 5 | | | | a fazer |
+| 1 | *(preencher na aula de 05/11)* | *(preencher)* | *(preencher)* | a fazer |
+| 2 | *(preencher na aula de 05/11)* | *(preencher)* | *(preencher)* | a fazer |
+| 3 | *(preencher na aula de 05/11)* | *(preencher)* | *(preencher)* | a fazer |
+| 4 | *(preencher na aula de 05/11)* | *(preencher)* | *(preencher)* | a fazer |
+| 5 | *(preencher na aula de 05/11)* | *(preencher)* | *(preencher)* | a fazer |
 
 **Papéis do grupo (Tema C):**
 - A1 — Fausto Cananga (2025102675): Dados, protocolo e integração. Lidera D1, D3 (interface), D5.
