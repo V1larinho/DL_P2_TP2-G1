@@ -98,11 +98,11 @@ H1–H4 + L/K/orçamento fixados ──> PROTOCOLO.md ──> só então correr 
 - [x] **P8.4** `python src/dados.py --verificar` imprime as contagens e **não** levanta erro — *feito: 6 438 / 611 / 628 recortes, 1 640 multi-rótulo no treino* — **A1** · *PL08 §2.2*
 - [x] **P8.5** Determinismo: duas execuções com a mesma seed produzem o **mesmo primeiro lote** — *feito: `python src/dados.py --determinismo` compara a soma do 1.º lote* — **A1** · *PL08 §2.2*
 - [ ] **P8.6** Baseline do **tema C** treinada: CNN pré-treinada (**EfficientNet**) com fine-tuning a **100% dos rótulos** — **A2** · *PL08 §2.3* — **em aberto**: não corrida. O teto em uso é a **cabeça linear sobre DINOv2** (F1 0,830), que é o teto *desta representação*, não a CNN afinada que o PL08 manda comparar. Sem GPU, o fine-tune a 6 438 imagens não cabe no tempo das aulas; fica para quando houver máquina, com o mesmo `resultados.csv`.
-- [x] **P8.7** `resultados.csv` com **data, commit, configuração, métrica de validação e tempo de treino** por experiência — *feito: [`paper/resultados.csv`](paper/resultados.csv), escrito por `comum.registar_resultado`. **A coluna `commit` está `sem-git`**: o repositório ainda não foi inicializado (P6.1) — é a única coluna que não cumpre o requisito* — **A1, todos** · *PL08 §2.3*
-- [ ] **P8.8** Apresentação do método planeada nos **6 blocos** (3+5+7+4+3+3 = 25 min) — **A3, todos** · *PL08 §2.4*
-- [ ] **P8.9** Ficha-resumo de **1 página** para os colegas (temas A/B/C) pronta para o ensaio da semana seguinte — **A3** · *PL08 §2.4*
-- [ ] **P8.10** **Com IA:** pedir 5 perguntas difíceis sobre o método, responder **sem IA** e confirmar no artigo original; registar onde a IA esteve errada ou vaga — **todos** · *PL08 §2.5*
-- [ ] **P8.11** Responder por escrito às Questões 1–3 da PL08 (augmentation só no treino; registo de commit/configuração; baseline forte) — **A5, todos** · *PL08 §3*
+- [x] **P8.7** `resultados.csv` com **data, commit, configuração, métrica de validação e tempo de treino** por experiência — *feito: [`paper/resultados.csv`](paper/resultados.csv), 276 linhas com commit 9f89717, métricas por classe, ece e tempos* — **A1, todos** · *PL08 §2.3*
+- [x] **P8.8** Apresentação do método planeada nos **6 blocos** (3+5+7+4+3+3 = 25 min) — *feito: [`docs/plano_seminario.md`](docs/plano_seminario.md)* — **A3, todos** · *PL08 §2.4*
+- [x] **P8.9** Ficha-resumo de **1 página** para os colegas (temas A/B/C) pronta para o ensaio da semana seguinte — *feito: [`docs/FICHA_RESUMO_SEMINARIO.md`](docs/FICHA_RESUMO_SEMINARIO.md)* — **A3** · *PL08 §2.4*
+- [x] **P8.10** **Com IA:** pedir 5 perguntas difíceis sobre o método, responder **sem IA** e confirmar no artigo original; registar onde a IA esteve errada ou vaga — *feito: registo IA-3 no [`AI_LOG.md`](AI_LOG.md)* — **todos** · *PL08 §2.5*
+- [x] **P8.11** Responder por escrito às Questões 1–3 da PL08 (augmentation só no treino; registo de commit/configuração; baseline forte) — *feito: [`docs/RESPOSTAS_PL08.md`](docs/RESPOSTAS_PL08.md)* — **A5, todos** · *PL08 §3*
 - [ ] **P8.12** Fecho da aula (4 itens): feedback registado · `src/dados.py` com verificação · baseline registada · apresentação planeada — **todos** · *PL08 "No fim da aula"*
 
 ## 7. Aula teórica 7 — Deteção: YOLO, RetinaNet, NMS e mAP (25/10)
@@ -148,7 +148,7 @@ H1–H4 + L/K/orçamento fixados ──> PROTOCOLO.md ──> só então correr 
 - [ ] **C2.11** **Seminário I (17/11)**: 25 min + 5 min; apresenta o porta-voz, mas as perguntas podem ir a **qualquer** membro — **A3 apresenta · todos preparam** · *PL08 §Enquadramento*
 - [ ] **C2.12** ResNet-50 afinada para **aleatória + melhor estratégia** (3 seeds) — confirmação — **A2** · *Tema C §5.2*
 - [ ] **C2.13** F1 das classes raras vs orçamento; **Tabela 2** — **A4** · *Tema C §5.2*
-- [ ] **C2.14** `resultados.csv` com **uma linha por** (classificador, estratégia, seed, ronda, fração, métrica, valor, data, commit) — **A1** · *Tema C §5.2, §7.3*
+- [x] **C2.14** `resultados.csv` com **uma linha por** (classificador, estratégia, seed, ronda, fração, métrica, valor, data, commit) — *feito: [`paper/resultados.csv`](paper/resultados.csv)* — **A1** · *Tema C §5.2, §7.3*
 
 ### Fase 3 — integração e protótipo (sem. 11–12 → 03/12)
 
@@ -207,7 +207,7 @@ decidir **onde refotografar**. O problema e a métrica principal não mudam.
 - [ ] **V2** Com **K ≥ todo o pool**, todas as estratégias convergem para o teto — **A3** · *Tema C §6*
 - [ ] **V3** A estratégia **aleatória com cabeça linear reproduz-se** entre execuções com a mesma seed — **A3, A5** · *Tema C §6*
 - [ ] **V4** `Dice = 2·IoU/(1+IoU)` verificado numericamente — **A5** · *PL06 §2.3*
-- [ ] **V5** `python src/dados.py --verificar` corre sem erro e imprime contagens — **A1** · *PL08 §2.2*
+- [x] **V5** `python src/dados.py --verificar` corre sem erro e imprime contagens — *testado e confirmado (0 fugas)* — **A1** · *PL08 §2.2*
 - [ ] **V6** BADGE com K = |pool| seleciona **tudo**; escolhidos são **diversos** no t-SNE; mesma seed ⇒ mesmo resultado — **A3** · *Tema C §8*
 
 ## 10. Questões a responder por escrito (defesas orais e reunião de passagem)
@@ -231,9 +231,9 @@ Respostas: `docs/questoes/` (uma ficheiro por aula), discutidas com o docente na
 
 ## 11. Pedidos obrigatórios "Com IA" (registar em `AI_LOG.md`)
 
-- [ ] **IA-1** PL06: pedir um README do tema e comparar com a tabela 2.1 (registar invenções) — **A1**
+- [x] **IA-1** PL06: pedir um README do tema e comparar com a tabela 2.1 (registar invenções) — *registado no [`AI_LOG.md`](AI_LOG.md) em 05/11* — **A1**
 - [ ] **IA-2** PL07: converter anotações para o formato necessário + verificar sobre 5 imagens — **A1**
-- [ ] **IA-3** PL08: 5 perguntas difíceis sobre o método; responder sem IA e confirmar no artigo — **todos**
+- [x] **IA-3** PL08: 5 perguntas difíceis sobre o método; responder sem IA e confirmar no artigo — *registado no [`AI_LOG.md`](AI_LOG.md) em 05/11* — **todos**
 - [ ] **IA-4** Tema C, semana 8: *"Implementa o BADGE (embeddings de gradiente da última camada + k-means++) para um classificador multi-rótulo."* Verificar K=|pool|, diversidade no t-SNE e repetibilidade — **A3**
 - [ ] **IA-5** Tema C, semana 9: *"Identifica fugas de dados, métricas inadequadas e comparações injustas neste PROTOCOLO.md."* Decidir crítica a crítica — **A1**
 - [ ] **IA-6** Tema C, semana 14: *"Marca cada frase desta discussão como suportada ou não pelos números da tabela."* Reescrever as não suportadas — **todos**

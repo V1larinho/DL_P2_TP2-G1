@@ -38,3 +38,5 @@ venv/
 Thumbs.db
 .vscode/
 .idea/
+docs/*.html
+docs/preview_*.png
