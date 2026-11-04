@@ -31,3 +31,4 @@ with sync_playwright() as p:
     browser.close()
 
 print(f"PDF Ficha Resumo Seminário: {pdf_ficha}")
+

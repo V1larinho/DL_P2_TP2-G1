@@ -1,6 +1,6 @@
 ordem,path,grupo,incerteza,previsto_oculto,anotado
-1,classification_dataset/train/background/image_0000537_crop_0000005.png,537,0.6089,,0
-2,classification_dataset/train/defects/image_0000461_crop_0000003.png,461,0.6008,CorrosionStain|ExposedBars,0
+1,classification_dataset/train/background/image_0000537_crop_0000005.png,537,0.6089,,1
+2,classification_dataset/train/defects/image_0000461_crop_0000003.png,461,0.6008,CorrosionStain|ExposedBars,1
 3,classification_dataset/train/defects/image_0000679_crop_0000001.png,679,0.588,CorrosionStain|ExposedBars|Spallation,0
 4,classification_dataset/train/defects/image_0000150_crop_0000003.png,150,0.5872,,0
 5,classification_dataset/train/background/image_0001428_crop_0000002.png,1428,0.5862,Background|CorrosionStain|Efflorescence,0
